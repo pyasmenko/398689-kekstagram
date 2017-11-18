@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Павел Ясменко](https://up.htmlacademy.ru/javascript/11/user/398689).
-* Наставник: `Неизвестно`.
+* Наставник: [ПАлексей Балесный](https://htmlacademy.ru/profile/id221665).
 
 ---
 
