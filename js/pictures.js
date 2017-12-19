@@ -64,6 +64,7 @@ var renderOverlay = function (data) {
   overlayElement.querySelector('.gallery-overlay-image').src = data.url;
   overlayElement.querySelector('.likes-count').textContent = data.likes;
   overlayElement.querySelector('.comments-count').textContent = data.comments.length;
+  document.addEventListener('keydown', onOverlayKeyDown);
 };
 // ------------------------------------------
 
@@ -73,10 +74,44 @@ var picturesBlock = document.querySelector('.pictures');
 
 var overlayElement = document.querySelector('.gallery-overlay');
 
+var onOverlayKeyDown = function (evt){
+  if (evt.keyCode === 27) {
+    document.removeEventListener('keydown', onOverlayKeyDown);
+  overlayElement.classList.add('hidden')
+  }
+}
+
 // ----------------------------------------
 
 pictures = getRandomPictures();
 
 renderPictures(pictures);
 
-renderOverlay(pictures[0]);
+//renderOverlay(pictures[0]);
+
+var picturesElements = document.querySelectorAll('.picture')
+var closeOverlay = document.querySelector('.gallery-overlay-close')
+
+var addPictureHandler = function(element, data){
+  element.addEventListener ('click', function (evt) {
+    evt.preventDefault();
+    renderOverlay(data);
+  });
+}
+
+for (var i = 0; i < picturesElements.length; i++) {
+  addPictureHandler(picturesElements[i], pictures[i])
+}
+
+
+closeOverlay.addEventListener('click', function (){
+  document.removeEventListener('keydown', onOverlayKeyDown);
+  overlayElement.classList.add('hidden')
+})
+
+closeOverlay.addEventListener('keydown', function (evt){
+  if (evt.keyCode === 13) {
+    document.removeEventListener('keydown', onOverlayKeyDown);
+  overlayElement.classList.add('hidden')
+  }
+});
